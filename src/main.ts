@@ -119,7 +119,7 @@ function init() {
   entryPoint.innerHTML = `
     <div class="contained" style="width: 100%;">
       <header>
-        <div>calc</div>
+        <h1 style="margin: 0; font-size: inherit;">calc</h1>
 
         ${theme()}
       </header>
