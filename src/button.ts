@@ -117,7 +117,7 @@ function setupButtons(buttons: NodeListOf<HTMLButtonElement>) {
                     }
     
                     // either by pressing the "=" button or the operation buttons.
-                    if (isOperating && isGettingAnswer) {
+                    if (isOperating && isGettingAnswer && value != "decimal") {
                         if (currentOperation) {
                             const resultContainer = document.querySelector(".result")!;
                             const textContent = removeCommas(resultContainer.textContent!);
@@ -162,15 +162,11 @@ function setupButtons(buttons: NodeListOf<HTMLButtonElement>) {
                             } else if (value == "equals") {
                                 currentOperation = undefined;
                                 isOperating = false;
-                            } else if (value == "decimal") {
-                                resultContainer.textContent = "0.0";
                             }
     
                             isGettingAnswer = false;
                         }
-                    }
-
-                    if (value == "decimal") {
+                    } else if (value == "decimal") {
                         const resultContainer = document.querySelector(".result")!;
                         const textContent = removeCommas(resultContainer.textContent!);
 
