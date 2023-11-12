@@ -1,0 +1,316 @@
+:root {
+  font-family: "League Spartan", system-ui, sans-serif;
+  line-height: 1;
+  font-weight: 700;
+  font-size: 32px;
+
+  color-scheme: dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+
+  --clr-main-bg: 222 26% 31%;
+  --clr-secondary-bg: 223 31% 20%;
+  --clr-screen-bg: 224 36% 15%;
+
+  --clr-key-bg: 30 25% 89%;
+  --clr-key-shadow: 28 16% 65%;
+
+  --clr-reset-key-bg: 225 21% 49%;
+  --clr-reset-key-shadow: 224 28% 35%;
+
+  --clr-equal-key-bg: 6 63% 50%;
+  --clr-equal-key-shadow: 6 70% 34%;
+
+  --clr-text: 221 14% 31%;
+  --clr-text-secondary: 0 0% 100%;
+  --clr-text-white: 0 0% 100%;
+  --clr-foreground: 0 0% 100%;
+  --clr-key-bg-hover: 0 0% 100%;
+  --clr-equal-key-bg-hover: 6 73% 62.5%;
+  --clr-reset-key-bg-hover: 245 41% 79%;
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --clr-main-bg: 0 0% 90%;
+  --clr-secondary-bg: 0 5% 81%;
+  --clr-screen-bg: 0 0% 93%;
+
+  --clr-key-bg: 45 7% 89%;
+  --clr-key-shadow: 35 11% 61%;
+
+  --clr-reset-key-bg: 185 42% 37%;
+  --clr-reset-key-shadow: 185 58% 25%;
+
+  --clr-equal-key-bg: 25 98% 40%;
+  --clr-equal-key-shadow: 25 99% 27%;
+
+  --clr-text: 60 10% 19%;
+  --clr-text-secondary: 0 0% 100%;
+  --clr-text-white: 0 0% 100%;
+  --clr-foreground: 60 10% 19%;
+  --clr-key-bg-hover: 0 0% 100%;
+  --clr-equal-key-bg-hover: 25 98% 60%;
+  --clr-reset-key-bg-hover: 185 42% 57%;
+}
+
+[data-theme="high-contrast"] {
+  --clr-main-bg: 268 75% 9%;
+  --clr-secondary-bg: 268 71% 12%;
+  --clr-screen-bg: 268 71% 12%;
+
+  --clr-key-bg: 268 47% 21%;
+  --clr-key-shadow: 290 70% 36%;
+
+  --clr-reset-key-bg: 281 89% 26%;
+  --clr-reset-key-shadow: 285 91% 52%;
+
+  --clr-equal-key-bg: 176 100% 44%;
+  --clr-equal-key-shadow: 177 92% 70%;
+
+  --clr-text: 52 100% 62%;
+  --clr-text-secondary: 198 20% 13%;
+  --clr-text-white: 0 0% 100%;
+  --clr-foreground: 52 100% 62%;
+  --clr-key-bg-hover: 285 91% 52%;
+  --clr-equal-key-bg-hover: 177 92% 70%;
+  --clr-reset-key-bg-hover: 290 70% 36%;
+}
+
+*,
+::before,
+::after {
+  box-sizing: inherit;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: hsl(var(--clr-main-bg) / var(--_bg-opacity, 1));
+  color: hsl(var(--clr-foreground));
+}
+
+.container {
+  display: grid;
+  grid-template-columns:
+    [full-width-start] minmax(var(--padding-inline, 1rem), 1fr)
+    [contained-start] min(100% - (var(--padding-inline, 1rem) * 2), var(--max-content-width, 540px))
+    [contained-end] minmax(var(--padding-inline, 1rem), 1fr)
+    [full-width-end]
+  ;
+}
+
+#app {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+}
+
+.container > .contained {
+  grid-column: contained;
+}
+
+.container > .full-width {
+  grid-column: full-width;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+
+  box-shadow: 0px 4px var(--_clr-shadow, transparent);
+
+  transition-property: background-color, transform;
+  will-change: background-color, transform;
+  transition-duration: 250ms;
+
+  padding: 0.5rem;
+  font-weight: 700;
+  font-size: clamp(0.7em, 2vw + 0.375em, 1.25em);
+  border-radius: 0.175rem;
+
+  font-family: inherit;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 768px) {
+  button {
+    border-radius: 0.25rem;
+  }
+}
+
+button.reset,
+button.equals {
+  font-size: clamp(0.5em, 2vw + 0.375em, 0.875em);
+}
+
+button.calc-button {
+  background-color: hsl(var(--clr-key-bg) / var(--_bg-opacity, 1));
+  --_clr-shadow: hsl(var(--clr-key-shadow));
+  color: hsl(var(--clr-text));
+}
+
+button.calc-button:hover {
+  background-color: hsl(var(--clr-key-bg-hover) /var(--_bg-opacity, 1));
+}
+
+button.equals,
+.switch > div {
+  background-color: hsl(var(--clr-equal-key-bg) / var(--_bg-opacity, 1));
+  --_clr-shadow: hsl(var(--clr-equal-key-shadow));
+}
+
+button.equals {
+  color: hsl(var(--clr-text-secondary));
+}
+
+button.reset {
+  background-color: hsl(var(--clr-reset-key-bg) / var(--_bg-opacity, 1));
+  color: hsl(var(--clr-text-white));
+  --_clr-shadow: hsl(var(--clr-reset-key-shadow));
+}
+
+button.reset:hover {
+  background-color: hsl(var(--clr-reset-key-bg-hover) / var(--_bg-opacity, 1));
+}
+
+button.equals:hover,
+.switch > div:hover {
+  background-color: hsl(var(--clr-equal-key-bg-hover) / var(--_bg-opacity, 1));
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+input {
+  margin: 0;
+}
+
+header {
+  font-size: 0.875rem;
+
+  display: flex;
+  justify-content: space-between;
+
+  align-items: flex-end;
+}
+
+#theme-form {
+  display: flex;
+  position: relative;
+
+  background-color: hsl(var(--clr-secondary-bg) / var(--_bg-opacity, 1));
+
+  border-radius: 0.5rem;
+
+  padding: 0.2rem;
+}
+
+.active-theme-indicator {
+  --_side-offset: 0.175rem;
+
+  position: absolute;
+
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  margin: auto;
+
+  width: calc(100% / 5);
+  aspect-ratio: 1/1;
+
+  border-radius: 50%;
+
+  transition-property: transform;
+  will-change: transform;
+  transition-duration: 250ms;
+
+  transform: translateX(-150%);
+
+  z-index: 1;
+
+  cursor: pointer;
+}
+
+.active-theme-indicator[data-current="light"] {
+  transform: translateX(0%);
+}
+
+.active-theme-indicator[data-current="high-contrast"] {
+  transform: translateX(150%);
+}
+
+#theme-form input {
+  width: 0.6rem;
+  
+  opacity: 0;
+}
+
+.result {
+  text-align: end;
+  background-color: hsl(var(--clr-screen-bg) / var(--_bg-opacity, 1));
+  font-size: clamp(1.5em, 2vw + 0.025em, 1.75em);
+  margin-block: 0.75rem;
+  padding: 0.75rem;
+
+  word-break: break-all;
+}
+
+.button-grid,
+.result {
+  border-radius: 0.25rem;
+}
+
+.button-grid {
+  background-color: hsl(var(--clr-secondary-bg));
+
+  padding: 0.75rem;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(2.5ch, 1fr));
+}
+
+@media only screen and (min-width: 768px) {
+  .result {
+    padding: 1rem;
+  }
+
+  .button-grid {
+    gap: 0.75rem;
+    padding: 1rem;
+  }
+}
+
+@media only screen and (min-width: 375px) {
+  .button-grid {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+}
+
+.button-grid .reset[value="reset"],
+.button-grid .equals {
+  grid-column: span 2;
+}
+
+
